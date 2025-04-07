@@ -1,3 +1,4 @@
+//
 let data = [
   //   { item: "item1", checked: "", idx: 0 },
   //   { item: "item2", checked: "checked", idx: 1 },
