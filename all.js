@@ -107,7 +107,7 @@ deleteAll.addEventListener("click", (e) => {
 
 function renderHtml() {
   let str = "";
-  let count = 0;
+
   let tmpData = [];
   if (page === 0) {
     tmpData = data;
@@ -116,10 +116,15 @@ function renderHtml() {
   } else if (page === 2) {
     tmpData = data.filter((item) => item.checked !== "");
   }
-
+  let total = 0;
+  let done = 0;
+  let undone = 0;
   tmpData.forEach((item, idx) => {
-    if (item.checked === "") {
-      count++;
+    total++;
+    if (item.checked !== "") {
+      done++;
+    } else if (item.checked === "") {
+      undone++;
     }
     str += ` <li>
                       <label class="checkbox" for="">
@@ -130,7 +135,15 @@ function renderHtml() {
                     </li>`;
   });
 
-  itemCount.innerHTML = ` ${count} 個待完成項目`;
+  if (page === 0) {
+    itemCount.innerHTML = `共 ${total} 個項目<br>${undone} 個待完成項目<br>${done} 個完成項目`;
+  } else if (page === 1) {
+    itemCount.innerHTML = ` ${undone} 個待完成項目`;
+  } else if (page === 2) {
+    itemCount.innerHTML = ` ${done} 個完成項目`;
+  }
+  // itemCount.innerHTML = ` ${count} 個待完成項目`;
+
   list.innerHTML = str;
 }
 
